@@ -3,7 +3,7 @@ import FadeLoopVideo from './FadeLoopVideo';
 import { Magnetic } from './Nav';
 import { useReveal } from '@/hooks/useReveal';
 
-const VIDEO_SRC = '/video/estate.mp4';
+const VIDEO_SRC = '/video/hero.mp4';
 const BOOKING_URL = 'https://cal.com/tuhami-consulting/discovery';
 const EMAIL = 'hello@tuhamiconsulting.com';
 
