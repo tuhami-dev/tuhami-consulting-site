@@ -1,228 +1,138 @@
 'use client';
-
-import { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X } from 'lucide-react';
+import { useState, useEffect, useRef } from 'react';
 
 const BOOKING_URL = 'https://cal.com/tuhami-consulting/discovery';
 
-const links = [
-  { label: 'Work', href: '#work' },
-  { label: 'Services', href: '#services' },
-  { label: 'About', href: '#about' },
-];
+function Magnetic({ children }: { children: React.ReactNode }) {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const onMove = (e: MouseEvent) => {
+      const r = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width / 2)) * 0.35;
+      const dy = (e.clientY - (r.top + r.height / 2)) * 0.35;
+      el.style.transform = `translate(${dx}px, ${dy}px)`;
+    };
+    const onLeave = () => { el.style.transform = 'translate(0,0)'; };
+    el.addEventListener('mousemove', onMove);
+    el.addEventListener('mouseleave', onLeave);
+    return () => { el.removeEventListener('mousemove', onMove); el.removeEventListener('mouseleave', onLeave); };
+  }, []);
+  return <div ref={ref} className="magnetic" data-magnetic>{children}</div>;
+}
 
-export default function Nav() {
+export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
-  const [mobileOpen, setMobileOpen] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const handler = () => setScrolled(window.scrollY > 60);
-    window.addEventListener('scroll', handler, { passive: true });
-    return () => window.removeEventListener('scroll', handler);
+    const onScroll = () => setScrolled(window.scrollY > 32);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNavClick = (href: string) => {
-    setMobileOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const onVideo = overVideo && !scrolled;
+  const fg = onVideo ? '#FFFFFF' : 'var(--ink)';
+  const fgSoft = onVideo ? 'rgba(255,255,255,0.92)' : 'var(--ink-soft)';
+
+  const scrollTo = (id: string) => {
+    setMenuOpen(false);
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
+  const navLinks = [
+    { label: 'Process', id: 'process' },
+    { label: 'Services', id: 'services' },
+    { label: 'Work', id: 'work' },
+    { label: 'About', id: 'about' },
+    { label: 'Reviews', id: 'reviews' },
+  ];
+
   return (
-    <>
-      <motion.nav
-        initial={{ y: -8, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.4, ease: 'easeOut' }}
+    <nav
+      data-on-video={onVideo ? 'true' : undefined}
+      style={{ position: 'fixed', top: 16, left: 16, right: 16, zIndex: 100, transition: 'all .5s cubic-bezier(.2,.7,.2,1)' }}
+    >
+      <div
+        className={scrolled ? 'glass' : ''}
         style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          right: 0,
-          zIndex: 100,
-          height: '64px',
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          padding: '0 40px',
-          borderBottom: scrolled ? '1px solid var(--border)' : '1px solid transparent',
-          background: scrolled
-            ? 'rgba(14,14,13,0.94)'
-            : 'transparent',
-          backdropFilter: scrolled ? 'blur(12px)' : 'none',
-          WebkitBackdropFilter: scrolled ? 'blur(12px)' : 'none',
-          transition: 'background 0.3s ease, border-color 0.3s ease, backdrop-filter 0.3s ease',
+          maxWidth: 1280, margin: '0 auto',
+          padding: scrolled ? '12px 18px 12px 24px' : '14px 14px 14px 24px',
+          borderRadius: 999,
+          display: 'flex', alignItems: 'center', justifyContent: 'space-between',
+          background: scrolled ? undefined : (onVideo ? 'linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.18))' : 'transparent'),
+          backdropFilter: onVideo && !scrolled ? 'blur(6px) saturate(1.05)' : undefined,
+          WebkitBackdropFilter: onVideo && !scrolled ? 'blur(6px) saturate(1.05)' : undefined,
+          border: scrolled ? undefined : (onVideo ? '0.5px solid rgba(255,255,255,0.14)' : '0.5px solid transparent'),
         }}
       >
         {/* Logo */}
-        <a
-          href="#"
-          onClick={(e) => { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-          style={{
-            fontFamily: 'var(--font-playfair), serif',
-            fontSize: '18px',
-            fontWeight: 600,
-            color: 'var(--text-primary)',
-            letterSpacing: '-0.01em',
-            textDecoration: 'none',
-            flexShrink: 0,
-          }}
-        >
-          Tuhami <span style={{ color: 'var(--gold)' }}>Consulting</span>
-        </a>
+        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+          style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'none', color: fg, display: 'flex', alignItems: 'center', gap: 10, textShadow: onVideo ? '0 1px 14px rgba(0,0,0,.55)' : 'none', padding: 0 }}>
+          <span style={{ width: 22, height: 22, borderRadius: '50%', background: onVideo ? '#FBF8F2' : 'var(--ink)', display: 'inline-block', boxShadow: onVideo ? '0 0 0 1px rgba(0,0,0,.15), 0 2px 12px rgba(0,0,0,.4)' : 'none', flexShrink: 0 }} />
+          <span className="serif" style={{ fontSize: 24, letterSpacing: '-0.02em', color: fg }}>
+            Tuhami<sup style={{ fontSize: 9, marginLeft: 2, fontFamily: 'Inter', verticalAlign: 'super' }}>®</sup>
+          </span>
+        </button>
 
         {/* Desktop links */}
-        <div
-          className="hidden md:flex"
-          style={{ alignItems: 'center', gap: '32px' }}
-        >
-          {links.map((l) => (
-            <NavLink key={l.href} label={l.label} href={l.href} onClick={handleNavClick} />
+        <div style={{ display: 'flex', gap: 32, alignItems: 'center' }} className="hidden md:flex">
+          {navLinks.map((l, i) => (
+            <button key={l.id} onClick={() => scrollTo(l.id)}
+              className="nav-link"
+              data-active={i === 0 ? 'true' : undefined}
+              style={{
+                background: 'none', border: 'none', cursor: 'pointer', padding: 0,
+                color: i === 0 ? fg : fgSoft,
+                textShadow: onVideo ? '0 1px 12px rgba(0,0,0,.55)' : 'none',
+                fontSize: 13,
+              }}
+            >{l.label}</button>
           ))}
-          <a
-            href={BOOKING_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            style={{
-              fontSize: '13px',
-              fontWeight: 500,
-              color: 'var(--bg-base)',
-              background: 'var(--gold)',
-              borderRadius: '100px',
-              padding: '8px 22px',
-              letterSpacing: '0.03em',
-              transition: 'background 0.2s, transform 0.15s',
-              display: 'inline-block',
-            }}
-            onMouseEnter={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'var(--gold-light)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
-            }}
-            onMouseLeave={(e) => {
-              (e.currentTarget as HTMLElement).style.background = 'var(--gold)';
-              (e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-            }}
-          >
-            Book a Call
-          </a>
         </div>
 
-        {/* Mobile hamburger */}
-        <button
-          className="md:hidden"
-          onClick={() => setMobileOpen((v) => !v)}
-          style={{
-            background: 'none',
-            border: 'none',
-            color: 'var(--text-primary)',
-            cursor: 'pointer',
-            padding: '4px',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-          aria-label="Toggle menu"
-        >
-          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </motion.nav>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+          <Magnetic>
+            <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-pill"
+              style={{
+                padding: '11px 22px', fontSize: 13,
+                background: onVideo ? '#FBF8F2' : 'var(--ink)',
+                color: onVideo ? '#1A1814' : 'var(--bg)',
+              }}>
+              <span>Book a call</span><span className="arrow">→</span>
+            </a>
+          </Magnetic>
+
+          {/* Mobile hamburger */}
+          <button
+            onClick={() => setMenuOpen(v => !v)}
+            className="flex md:hidden"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: fg, padding: 4, flexDirection: 'column', gap: 5, display: 'none' }}
+            aria-label="Menu"
+          >
+            <span style={{ display: 'block', width: 22, height: 1.5, background: 'currentColor', transition: 'all .3s' }} />
+            <span style={{ display: 'block', width: 22, height: 1.5, background: 'currentColor', transition: 'all .3s' }} />
+          </button>
+        </div>
+      </div>
 
       {/* Mobile menu */}
-      <AnimatePresence>
-        {mobileOpen && (
-          <motion.div
-            key="mobile-menu"
-            initial={{ opacity: 0, y: -12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.22 }}
-            style={{
-              position: 'fixed',
-              top: '64px',
-              left: 0,
-              right: 0,
-              zIndex: 99,
-              background: 'rgba(14,14,13,0.97)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)',
-              borderBottom: '1px solid var(--border)',
-              padding: '24px 32px 32px',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '20px',
-            }}
-          >
-            {links.map((l) => (
-              <button
-                key={l.href}
-                onClick={() => handleNavClick(l.href)}
-                style={{
-                  background: 'none',
-                  border: 'none',
-                  textAlign: 'left',
-                  fontSize: '18px',
-                  fontFamily: 'var(--font-playfair), serif',
-                  fontWeight: 500,
-                  color: 'var(--text-primary)',
-                  cursor: 'pointer',
-                  padding: '4px 0',
-                }}
-              >
-                {l.label}
-              </button>
-            ))}
-            <a
-              href={BOOKING_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              style={{
-                marginTop: '8px',
-                fontSize: '14px',
-                fontWeight: 500,
-                color: 'var(--bg-base)',
-                background: 'var(--gold)',
-                borderRadius: '100px',
-                padding: '12px 28px',
-                textAlign: 'center',
-              }}
-            >
-              Book a Call
-            </a>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </>
+      {menuOpen && (
+        <div className="glass" style={{
+          maxWidth: 1280, margin: '8px auto 0', borderRadius: 20,
+          padding: '24px 28px 32px', display: 'flex', flexDirection: 'column', gap: 18,
+        }}>
+          {navLinks.map((l) => (
+            <button key={l.id} onClick={() => scrollTo(l.id)}
+              style={{ background: 'none', border: 'none', cursor: 'pointer', textAlign: 'left', fontSize: 22, fontFamily: 'var(--font-instrument)', color: 'var(--ink)', padding: '4px 0' }}>
+              {l.label}
+            </button>
+          ))}
+        </div>
+      )}
+    </nav>
   );
 }
 
-function NavLink({
-  label,
-  href,
-  onClick,
-}: {
-  label: string;
-  href: string;
-  onClick: (href: string) => void;
-}) {
-  const [hovered, setHovered] = useState(false);
-  return (
-    <button
-      onClick={() => onClick(href)}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
-      style={{
-        background: 'none',
-        border: 'none',
-        fontSize: '13px',
-        fontWeight: 400,
-        letterSpacing: '0.08em',
-        textTransform: 'uppercase',
-        color: hovered ? 'var(--text-primary)' : 'var(--text-muted)',
-        cursor: 'pointer',
-        transition: 'color 0.2s',
-        padding: 0,
-      }}
-    >
-      {label}
-    </button>
-  );
-}
+export { Magnetic };

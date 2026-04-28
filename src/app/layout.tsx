@@ -1,30 +1,45 @@
 import type { Metadata } from 'next';
-import { Playfair_Display, DM_Sans } from 'next/font/google';
+import { DM_Serif_Display, Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
 import './globals.css';
 
-const playfair = Playfair_Display({
+const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
-  variable: '--font-playfair',
+  variable: '--font-dm-serif',
   display: 'swap',
-  weight: ['400', '500', '600', '700'],
+  weight: ['400'],
   style: ['normal', 'italic'],
 });
 
-const dmSans = DM_Sans({
+const instrumentSerif = Instrument_Serif({
   subsets: ['latin'],
-  variable: '--font-dm-sans',
+  variable: '--font-instrument',
+  display: 'swap',
+  weight: ['400'],
+  style: ['normal', 'italic'],
+});
+
+const inter = Inter({
+  subsets: ['latin'],
+  variable: '--font-inter',
   display: 'swap',
   weight: ['300', '400', '500', '600'],
 });
 
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ['latin'],
+  variable: '--font-jetbrains',
+  display: 'swap',
+  weight: ['300', '400', '500'],
+});
+
 export const metadata: Metadata = {
-  title: 'Tuhami Consulting — Fractional PM & Product Consultant',
+  title: 'Tuhami Consulting — Product, UX & AI Automation',
   description:
-    'Anas Tuhami helps early-stage startups and growing teams ship better products faster. Fractional PM, product strategy, and UX consulting.',
+    'A fractional PM and full-stack AI builder for founders who need both a strategist and a shipper. Product strategy, AI integration, and SaaS development.',
   openGraph: {
-    title: 'Tuhami Consulting',
-    description: 'Fractional PM & product consultant for startups.',
+    title: 'Tuhami Consulting — Product, UX & AI Automation',
+    description: 'Fractional PM & AI product consultant for founders building real products.',
     url: 'https://tuhamiconsulting.com',
     siteName: 'Tuhami Consulting',
     locale: 'en_US',
@@ -32,19 +47,20 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tuhami Consulting — Fractional PM & Product Consultant',
-    description: 'Fractional PM & product consultant for startups.',
+    title: 'Tuhami Consulting — Product, UX & AI Automation',
+    description: 'Fractional PM & AI product consultant for founders building real products.',
   },
   metadataBase: new URL('https://tuhamiconsulting.com'),
 };
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+    <html
+      lang="en"
+      className={`${dmSerif.variable} ${instrumentSerif.variable} ${inter.variable} ${jetbrainsMono.variable}`}
+      data-palette="earth"
+      data-dark="false"
+    >
       <body>
         {children}
         <Analytics />

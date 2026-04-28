@@ -1,0 +1,16 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npx create-next-app@latest . --typescript --tailwind --eslint --app --src-dir --import-alias \"@/*\" --yes)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(npx vercel *)",
+      "Bash(git add *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "WebFetch(domain:api.anthropic.com)",
+      "Bash(cp \"/g/tuhami-dev/example_site/uploads/202963-919289028.mp4\" \"/g/tuhami-dev/tuhami-consulting-site/public/video/hero.mp4\")",
+      "Bash(cp \"/g/tuhami-dev/example_site/uploads/vecteezy_luxurious-modern-home-on-hillside-in-arizona-at-sunset_71719234.mp4\" \"/g/tuhami-dev/tuhami-consulting-site/public/video/estate.mp4\")"
+    ]
+  }
+}

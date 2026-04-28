@@ -1,21 +1,27 @@
 import Nav from '@/components/Nav';
 import Hero from '@/components/Hero';
-import CaseStudies from '@/components/CaseStudies';
+import LogosMarquee from '@/components/LogosMarquee';
+import HowItWorks from '@/components/HowItWorks';
 import Services from '@/components/Services';
+import CaseStudies from '@/components/CaseStudies';
 import About from '@/components/About';
-import CTA from '@/components/CTA';
+import Testimonials from '@/components/Testimonials';
+import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 
 export default function Home() {
   return (
     <>
-      <Nav />
+      <Nav overVideo />
       <main>
         <Hero />
-        <CaseStudies />
+        <LogosMarquee />
+        <HowItWorks />
         <Services />
+        <CaseStudies />
         <About />
-        <CTA />
+        <Testimonials />
+        <Contact />
       </main>
       <Footer />
     </>
