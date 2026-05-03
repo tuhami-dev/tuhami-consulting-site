@@ -10,8 +10,7 @@ export default function LogosMarquee() {
   return (
     <div className="section" style={{ padding: '60px 0', overflow: 'hidden', borderTop: '0.5px solid var(--line)', borderBottom: '0.5px solid var(--line)' }}>
       <div className="container" style={{ marginBottom: 28, display: 'flex', alignItems: 'baseline', gap: 16 }}>
-        <span className="section-eyebrow">Trusted by</span>
-        <span className="san-serif" style={{ color: 'var(--muted)', fontSize: 18 }}>founders, operators & global enterprises building real products</span>
+        <span className="section-eyebrow">Trusted by founders, operators & global enterprises building real products</span>
       </div>
       <div style={{
         display: 'flex', overflow: 'hidden',
