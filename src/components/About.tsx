@@ -20,7 +20,7 @@ function Reveal({ children, style }: { children: React.ReactNode; style?: React.
 
 export default function About() {
   return (
-    <section className="section" id="about" style={{ background: 'var(--paper)', overflow: 'hidden' }}>
+    <section className="section" id="about" style={{ background: '#E8D8BC', overflow: 'hidden' }}>
       <div className="container">
         <Reveal style={{ marginBottom: 60 }}>
           <div className="section-eyebrow">About</div>
@@ -48,9 +48,11 @@ export default function About() {
 
           <Reveal>
             <div className="glass" style={{ padding: 28, borderRadius: 18, position: 'relative' }}>
-              <div className="placeholder" style={{ aspectRatio: '4 / 5', borderRadius: 12, marginBottom: 20 }}>
-                ANAS · PORTRAIT
-              </div>
+              <img
+                src="/about_me.png"
+                alt="Anas El Tuhami"
+                style={{ width: '100%', aspectRatio: '3 / 2', objectFit: 'cover', objectPosition: 'center top', borderRadius: 12, marginBottom: 20, display: 'block' }}
+              />
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18 }}>
                 <div>
                   <div className="serif" style={{ fontSize: 22, letterSpacing: '-0.02em' }}>Anas El Tuhami</div>
@@ -58,13 +60,13 @@ export default function About() {
                 </div>
                 <div style={{ display: 'flex', alignItems: 'center', gap: 8, color: 'var(--moss)', flexShrink: 0 }}>
                   <span className="pulse-dot" style={{ width: 8, height: 8, borderRadius: '50%', background: 'currentColor', display: 'inline-block' }} />
-                  <span className="mono" style={{ fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase' }}>Available · Q3 &apos;26</span>
+                  <span className="mono" style={{ fontSize: 11, letterSpacing: '.12em', textTransform: 'uppercase' }}>Available</span>
                 </div>
               </div>
               <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 10 }}>
                 {BULLETS.map((b, i) => (
                   <li key={i} style={{ display: 'flex', gap: 10, fontSize: 13, color: 'var(--ink-soft)', alignItems: 'baseline' }}>
-                    <span style={{ color: 'var(--clay)', fontFamily: 'var(--font-jetbrains)', fontSize: 11, flexShrink: 0 }}>+</span>
+                    <span style={{ color: 'var(--ink-soft)', fontFamily: 'var(--font-jetbrains)', fontSize: 11, flexShrink: 0 }}>+</span>
                     {b}
                   </li>
                 ))}

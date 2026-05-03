@@ -33,8 +33,9 @@ export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
   }, []);
 
   const onVideo = overVideo && !scrolled;
-  const fg = onVideo ? '#FFFFFF' : 'var(--ink)';
-  const fgSoft = onVideo ? 'rgba(255,255,255,0.92)' : 'var(--ink-soft)';
+  const dark = onVideo || scrolled;
+  const fg = dark ? '#FFFFFF' : 'var(--ink)';
+  const fgSoft = dark ? 'rgba(255,255,255,0.75)' : 'var(--ink-soft)';
 
   const scrollTo = (id: string) => {
     setMenuOpen(false);
@@ -51,28 +52,28 @@ export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
 
   return (
     <nav
-      data-on-video={onVideo ? 'true' : undefined}
+      data-on-video={dark ? 'true' : undefined}
       style={{ position: 'fixed', top: 16, left: 16, right: 16, zIndex: 100, transition: 'all .5s cubic-bezier(.2,.7,.2,1)' }}
     >
       <div
-        className={scrolled ? 'glass' : ''}
         style={{
           maxWidth: 1280, margin: '0 auto',
-          padding: scrolled ? '12px 18px 12px 24px' : '14px 14px 14px 24px',
+          padding: '12px 18px 12px 24px',
           borderRadius: 999,
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          background: scrolled ? undefined : (onVideo ? 'linear-gradient(180deg, rgba(0,0,0,0.42), rgba(0,0,0,0.18))' : 'transparent'),
-          backdropFilter: onVideo && !scrolled ? 'blur(6px) saturate(1.05)' : undefined,
-          WebkitBackdropFilter: onVideo && !scrolled ? 'blur(6px) saturate(1.05)' : undefined,
-          border: scrolled ? undefined : (onVideo ? '0.5px solid rgba(255,255,255,0.14)' : '0.5px solid transparent'),
+          background: 'rgba(20,17,12,0.85)',
+          backdropFilter: 'blur(20px) saturate(130%)',
+          WebkitBackdropFilter: 'blur(20px) saturate(130%)',
+          border: '0.5px solid rgba(255,255,255,0.08)',
+          boxShadow: '0 4px 24px rgba(0,0,0,0.25)',
         }}
       >
         {/* Logo */}
         <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
           style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'none', color: fg, display: 'flex', alignItems: 'center', gap: 10, textShadow: onVideo ? '0 1px 14px rgba(0,0,0,.55)' : 'none', padding: 0 }}>
-          <span style={{ width: 22, height: 22, borderRadius: '50%', background: onVideo ? '#FBF8F2' : 'var(--ink)', display: 'inline-block', boxShadow: onVideo ? '0 0 0 1px rgba(0,0,0,.15), 0 2px 12px rgba(0,0,0,.4)' : 'none', flexShrink: 0 }} />
+          <img src="/logo.png" alt="Tuhami Consulting" style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
           <span className="serif" style={{ fontSize: 24, letterSpacing: '-0.02em', color: fg }}>
-            Tuhami<sup style={{ fontSize: 9, marginLeft: 2, fontFamily: 'Inter', verticalAlign: 'super' }}>®</sup>
+            Tuhami Consulting<sup style={{ fontSize: 9, marginLeft: 2, fontFamily: 'Inter', verticalAlign: 'super' }}>®</sup>
           </span>
         </button>
 
@@ -97,8 +98,8 @@ export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
             <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-pill"
               style={{
                 padding: '11px 22px', fontSize: 13,
-                background: onVideo ? '#FBF8F2' : 'var(--ink)',
-                color: onVideo ? '#1A1814' : 'var(--bg)',
+                background: dark ? '#FBF8F2' : 'var(--ink)',
+                color: dark ? '#1A1814' : 'var(--bg)',
               }}>
               <span>Book a call</span><span className="arrow">→</span>
             </a>

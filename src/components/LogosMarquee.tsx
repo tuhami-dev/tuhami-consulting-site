@@ -1,8 +1,9 @@
 'use client';
 
 const CLIENT_LOGOS = [
-  'POLESTAR', 'EASY ST.', 'VOLADO·LABS', 'KERN', 'BALLAST LANE',
-  'NORTHWIND', 'ATLAS·AI', 'ROOT&BRANCH', 'CIPHER', 'FIELDNOTE',
+  'Mesa Boxing', 'Schneider Electric', 'TempurSealy', 'Johnson Controls',
+  'Easy Street Offers', 'Pirelli Tires', 'Michelin', 'John Deere',
+  'Channel Fusion', 'Ortiz Marketing', 'Lead Davinci', 'YourPOP', 'SACSII',
 ];
 
 export default function LogosMarquee() {
@@ -10,7 +11,7 @@ export default function LogosMarquee() {
     <div className="section" style={{ padding: '60px 0', overflow: 'hidden', borderTop: '0.5px solid var(--line)', borderBottom: '0.5px solid var(--line)' }}>
       <div className="container" style={{ marginBottom: 28, display: 'flex', alignItems: 'baseline', gap: 16 }}>
         <span className="section-eyebrow">Trusted by</span>
-        <span className="serif-it" style={{ color: 'var(--muted)', fontSize: 18 }}>founders, operators & startups building real products</span>
+        <span className="serif-it" style={{ color: 'var(--muted)', fontSize: 18 }}>founders, operators & global enterprises building real products</span>
       </div>
       <div style={{
         display: 'flex', overflow: 'hidden',

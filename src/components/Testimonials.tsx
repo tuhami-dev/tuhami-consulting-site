@@ -7,21 +7,25 @@ const TESTIMONIALS = [
     q: 'He brings deep technical knowledge, strong product intuition, and a calm, steady presence that brings clarity to complex problems. From scaling platform usage to improving critical workflows with AI automation, he delivered outcomes that moved the business forward.',
     n: 'Jennifer Allen',
     r: 'Creative Director, Polestar Graphics',
+    photo: '/jenallen.jpg',
   },
   {
     q: 'A rare mix of technical depth and product perspective. His calm approach makes him an excellent partner in complex and ambiguous environments.',
     n: 'Collin Wood',
     r: 'Founder, VoladoLabs.ai',
+    photo: '/collin.jpg',
   },
   {
     q: 'Strong sense of ownership. Asks the right questions, adapts quickly, and delivers results even when requirements are unclear. A reliable partner in fast-moving product environments.',
     n: 'Ben Kern',
     r: 'Founder, Kern Consulting',
+    photo: '/ben.jpg',
   },
   {
     q: 'Combines deep technical understanding with sharp product judgment. Communicates clearly across teams and drives execution in a way that keeps work aligned with both user needs and business goals.',
     n: 'Pedro Palau',
     r: 'Full Stack Dev, Ballast Lane',
+    photo: '/pedro.jpg',
   },
 ];
 
@@ -57,26 +61,30 @@ export default function Testimonials() {
           }}>&ldquo;</div>
 
           <div style={{ position: 'relative', zIndex: 2 }}>
-            <p
-              key={idx}
-              className="serif fade-rise"
-              style={{
-                fontSize: 'clamp(26px, 3.2vw, 44px)',
-                lineHeight: 1.2,
-                margin: 0,
-                letterSpacing: '-0.02em',
-                maxWidth: 1000,
-                color: 'var(--ink)',
-              }}
-            >
-              &ldquo;{t.q}&rdquo;
-            </p>
+            <div style={{ minHeight: 'clamp(160px, 22vw, 320px)' }}>
+              <p
+                key={idx}
+                className="serif fade-rise"
+                style={{
+                  fontSize: 'clamp(26px, 3.2vw, 44px)',
+                  lineHeight: 1.2,
+                  margin: 0,
+                  letterSpacing: '-0.02em',
+                  maxWidth: 1000,
+                  color: 'var(--ink)',
+                }}
+              >
+                &ldquo;{t.q}&rdquo;
+              </p>
+            </div>
 
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginTop: 48, gap: 24, flexWrap: 'wrap' }}>
               <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
-                <div className="placeholder" style={{ width: 48, height: 48, borderRadius: '50%', fontSize: 9 }}>
-                  {t.n.split(' ').map(s => s[0]).join('')}
-                </div>
+                <img
+                  src={t.photo}
+                  alt={t.n}
+                  style={{ width: 48, height: 48, borderRadius: '50%', objectFit: 'cover', objectPosition: 'center top', flexShrink: 0 }}
+                />
                 <div>
                   <div className="serif" style={{ fontSize: 20, letterSpacing: '-0.01em' }}>{t.n}</div>
                   <div className="mono" style={{ fontSize: 11, color: 'var(--muted)', letterSpacing: '.12em', textTransform: 'uppercase', marginTop: 2 }}>{t.r}</div>

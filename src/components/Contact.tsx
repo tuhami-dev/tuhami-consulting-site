@@ -18,12 +18,12 @@ export default function Contact() {
       {/* Video background */}
       <div style={{ position: 'absolute', inset: 0, zIndex: 0 }}>
         <FadeLoopVideo src={VIDEO_SRC} />
-        <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(180deg, var(--bg) 0%, rgba(0,0,0,0) 30%, rgba(0,0,0,0) 70%, var(--bg) 100%)' }} />
+        <div style={{ position: 'absolute', inset: 0, background: 'rgba(10,8,5,0.38)' }} />
       </div>
 
       <div className="container" style={{ position: 'relative', zIndex: 2, textAlign: 'center' }}>
         <Reveal>
-          <div className="section-eyebrow" style={{ marginBottom: 32, justifyContent: 'center', display: 'inline-flex' }}>
+          <div className="section-eyebrow" style={{ marginBottom: 32, justifyContent: 'center', display: 'inline-flex', color: 'var(--gold-soft)' }}>
             Ready when you are
           </div>
           <h2 className="serif" style={{
@@ -33,22 +33,20 @@ export default function Contact() {
             letterSpacing: '-0.035em',
             maxWidth: 1100,
             marginInline: 'auto',
+            color: '#F5EDDA',
           }}>
             Let&apos;s talk through your<br />
-            <em className="serif-it" style={{ color: 'var(--ink-soft)' }}>product or AI</em> needs.
+            <em className="serif-it" style={{ color: 'var(--gold-soft)' }}>product or AI</em> needs.
           </h2>
-          <p style={{ fontSize: 19, color: 'var(--ink-soft)', lineHeight: 1.55, maxWidth: 580, margin: '36px auto 0' }}>
+          <p style={{ fontSize: 19, color: 'rgba(245,237,218,0.85)', lineHeight: 1.55, maxWidth: 580, margin: '36px auto 0' }}>
             A short conversation to understand your goals, explore options, and decide if working together makes sense.
           </p>
           <div style={{ marginTop: 48, display: 'flex', justifyContent: 'center', gap: 16, flexWrap: 'wrap' }}>
             <Magnetic>
-              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-pill" style={{ padding: '18px 32px', fontSize: 15 }}>
+              <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-pill" style={{ padding: '18px 32px', fontSize: 15, background: '#F5EDDA', color: '#1A1208' }}>
                 <span>Book a discovery call</span><span className="arrow">→</span>
               </a>
             </Magnetic>
-            <a href={`mailto:${EMAIL}`} className="btn-ghost" style={{ padding: '14px 24px' }}>
-              {EMAIL}
-            </a>
           </div>
         </Reveal>
       </div>
