@@ -1,7 +1,10 @@
 import type { Metadata } from 'next';
 import { DM_Serif_Display, Instrument_Serif, Inter, JetBrains_Mono } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/react';
+import Script from 'next/script';
 import './globals.css';
+
+const GA_ID = 'G-SZDL0KS4VG';
 
 const dmSerif = DM_Serif_Display({
   subsets: ['latin'],
@@ -74,13 +77,13 @@ export const metadata: Metadata = {
     siteName: 'Tuhami Consulting',
     locale: 'en_US',
     type: 'website',
-    images: [{ url: '/og-image.png', width: 1200, height: 630, alt: 'Tuhami Consulting' }],
+    images: [{ url: '/social_proof.png', width: 1200, height: 630, alt: 'Tuhami Consulting' }],
   },
   twitter: {
     card: 'summary_large_image',
     title: TITLE,
     description: DESCRIPTION,
-    images: ['/og-image.png'],
+    images: ['/social_proof.png'],
   },
 };
 
@@ -132,6 +135,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       <body>
         {children}
         <Analytics />
+        <Script src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`} strategy="afterInteractive" />
+        <Script id="gtag-init" strategy="afterInteractive">{`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', '${GA_ID}');
+        `}</Script>
       </body>
     </html>
   );

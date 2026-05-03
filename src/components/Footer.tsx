@@ -48,12 +48,16 @@ export default function Footer() {
       <div className="container" style={{
         marginTop: 80, paddingTop: 24,
         borderTop: '0.5px solid var(--line)',
-        display: 'flex', justifyContent: 'space-between',
+        display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
         fontSize: 11, color: 'var(--muted)',
         letterSpacing: '.08em', textTransform: 'uppercase',
         fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace',
       }}>
         <span>© 2026 Tuhami Consulting</span>
+        <div style={{ display: 'flex', gap: 24 }}>
+          <a href="/privacy" className="nav-link" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace' }}>Privacy Policy</a>
+          <a href="/terms" className="nav-link" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace' }}>Terms of Service</a>
+        </div>
       </div>
     </footer>
   );
