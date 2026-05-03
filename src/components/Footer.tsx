@@ -33,7 +33,7 @@ function FootCol({ title, links }: { title: string; links: { label: string; href
 export default function Footer() {
   return (
     <footer style={{ borderTop: '0.5px solid var(--line)', padding: '60px 0 40px' }}>
-      <div className="container" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 40, alignItems: 'start' }}>
+      <div className="container footer-grid" style={{ display: 'grid', gridTemplateColumns: '2fr 1fr 1fr', gap: 40, alignItems: 'start' }}>
         <div>
           <div className="serif" style={{ fontSize: 28, letterSpacing: '-0.02em' }}>
             Tuhami<sup style={{ fontSize: 11, marginLeft: 2, fontFamily: 'Inter' }}>®</sup>
@@ -45,7 +45,7 @@ export default function Footer() {
         <FootCol title="Site" links={SITE_LINKS} />
         <FootCol title="Connect" links={CONNECT_LINKS} />
       </div>
-      <div className="container" style={{
+      <div className="container footer-bottom" style={{
         marginTop: 80, paddingTop: 24,
         borderTop: '0.5px solid var(--line)',
         display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12,
@@ -54,7 +54,7 @@ export default function Footer() {
         fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace',
       }}>
         <span>© 2026 Tuhami Consulting</span>
-        <div style={{ display: 'flex', gap: 24 }}>
+        <div className="footer-legal" style={{ display: 'flex', gap: 24 }}>
           <a href="/privacy" className="nav-link" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace' }}>Privacy Policy</a>
           <a href="/terms" className="nav-link" style={{ color: 'var(--muted)', fontSize: 11, letterSpacing: '.08em', textTransform: 'uppercase', fontFamily: 'var(--font-jetbrains), JetBrains Mono, monospace' }}>Terms of Service</a>
         </div>

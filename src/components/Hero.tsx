@@ -4,6 +4,7 @@ import { Magnetic } from './Nav';
 
 const VIDEO_SRC = '/video/hero.mp4';
 const BOOKING_URL = 'https://cal.com/tuhami-consulting/discovery';
+const TITLE_WORDS = 'Product strategy and AI engineering, for founders who ship.'.split(' ');
 
 export default function Hero() {
   return (
@@ -21,27 +22,34 @@ export default function Hero() {
         display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', textAlign: 'center',
         padding: '120px 24px 100px',
       }}>
-        <h1 className="fade-rise" style={{
+        <h1 style={{
           maxWidth: 820, margin: 0,
           fontFamily: 'var(--font-dm-serif), "DM Serif Display", Georgia, serif',
           fontWeight: 400,
           fontSize: 'clamp(36px, 5.5vw, 88px)',
-          lineHeight: 1.05,
+          lineHeight: 1.15,
           letterSpacing: '-0.025em',
           color: '#FFFFFF',
         }}>
-          Product strategy and AI engineering, for founders who ship.
+          {TITLE_WORDS.map((word, i) => (
+            <span key={i} style={{
+              display: 'inline-block',
+              animation: `fade-rise 0.85s cubic-bezier(.2,.7,.2,1) ${i * 55}ms both`,
+              marginRight: '0.28em',
+            }}>{word}</span>
+          ))}
         </h1>
 
-        <p className="fade-rise-d1" style={{
+        <p style={{
           fontSize: 'clamp(15px, 1.2vw, 18px)',
-          maxWidth: 480, marginTop: 24, lineHeight: 1.6,
-          color: 'rgba(255,255,255,.92)',
+          maxWidth: 480, marginTop: 28, lineHeight: 1.6,
+          color: 'rgba(255,255,255,.85)',
+          animation: 'fade-rise 1s cubic-bezier(.2,.7,.2,1) 680ms both',
         }}>
           A fractional PM and full-stack AI builder for founders who need both a strategist and a shipper.
         </p>
 
-        <div className="fade-rise-d2" style={{ marginTop: 24, display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div style={{ marginTop: 28, display: 'flex', gap: 14, alignItems: 'center', flexWrap: 'wrap', justifyContent: 'center', animation: 'fade-rise 1s cubic-bezier(.2,.7,.2,1) 880ms both' }}>
           <Magnetic>
             <a href={BOOKING_URL} target="_blank" rel="noopener noreferrer" className="btn-pill"
               style={{ padding: '13px 24px', fontSize: 13.5, background: '#FBF8F2', color: '#1A1814' }}>
@@ -56,7 +64,7 @@ export default function Hero() {
           </button>
         </div>
 
-        <div className="fade-rise-d2" style={{ marginTop: 32, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.5)' }}>
+        <div style={{ marginTop: 36, display: 'flex', flexDirection: 'column', alignItems: 'center', gap: 6, color: 'rgba(255,255,255,0.4)', animation: 'fade-rise 1s cubic-bezier(.2,.7,.2,1) 1100ms both' }}>
           <span className="mono" style={{ fontSize: 10, letterSpacing: '.18em', textTransform: 'uppercase' }}>Scroll</span>
           <span style={{ fontSize: 16, lineHeight: 1 }}>↓</span>
         </div>

@@ -419,12 +419,51 @@ nav[data-on-video="true"] .nav-link::after { background: rgba(255,255,255,0.9); 
 }
 .service-card:hover .service-card__link-arrow { transform: translateX(4px); }
 
-/* ── Responsive ── */
+/* ── Nav visibility (controlled without inline style override) ── */
+.nav-desktop   { display: flex; }
+.nav-hamburger { display: none; }
+
+/* ── Responsive — Tablet (≤ 900px) ── */
+@media (max-width: 900px) {
+  .how-header      { grid-template-columns: 1fr !important; gap: 32px !important; margin-bottom: 56px !important; }
+  .how-step        { grid-template-columns: 1fr !important; gap: 12px !important; padding: 40px 0 !important; }
+  .about-grid      { grid-template-columns: 1fr !important; gap: 48px !important; }
+  .services-header { grid-template-columns: 1fr !important; gap: 24px !important; }
+  .footer-grid     { grid-template-columns: 1fr !important; gap: 32px !important; }
+}
+
+/* ── Responsive — Mobile (≤ 768px) ── */
 @media (max-width: 768px) {
   .container { padding: 0 20px; }
-  .section { padding: 80px 0; }
-  .service-card { padding: 36px 28px 32px; }
+  .section   { padding: 80px 0; }
+
+  /* Nav */
+  .nav-brand-text { display: none !important; }
+  .nav-desktop    { display: none !important; }
+  .nav-hamburger  { display: flex !important; }
+
+  /* Step numbers */
+  .step-num { font-size: clamp(56px, 14vw, 96px) !important; }
+
+  /* Services accordion — always show description on mobile (no hover) */
+  .svc-row-main   { grid-template-columns: 40px 1fr auto !important; gap: 0 12px !important; }
+  .svc-row-tag    { display: none !important; }
+  .svc-row-expand { grid-template-rows: 1fr !important; }
+  .svc-row-desc   { grid-template-columns: 1fr !important; padding-top: 12px !important; }
+  .svc-row-spacer { display: none !important; }
+  .svc-row-title  { color: rgba(245,237,218,.92) !important; }
+
+  /* Contact padding */
+  #contact { padding: 100px 0 120px !important; }
+
+  /* Footer */
+  .footer-bottom  { flex-direction: column !important; align-items: flex-start !important; gap: 12px !important; }
+  .footer-legal   { flex-direction: column !important; align-items: flex-start !important; gap: 8px !important; }
 }
+
+/* ── Responsive — Small mobile (≤ 480px) ── */
 @media (max-width: 480px) {
-  .section { padding: 60px 0; }
+  .container { padding: 0 16px; }
+  .section   { padding: 64px 0; }
+  .service-card { padding: 36px 28px 32px; }
 }

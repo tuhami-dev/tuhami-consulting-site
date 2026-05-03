@@ -21,22 +21,23 @@ function ServiceRow({ s }: { s: typeof SERVICES[0] }) {
       className="reveal"
       onMouseEnter={() => setOpen(true)}
       onMouseLeave={() => setOpen(false)}
+      onClick={() => setOpen(v => !v)}
       style={{
         borderTop: '0.5px solid rgba(245,237,218,.1)',
         padding: open ? '40px 0 36px' : '30px 0',
         transition: 'padding .45s cubic-bezier(.2,.7,.2,1)',
-        cursor: 'default',
+        cursor: 'pointer',
       }}
     >
       {/* Main row */}
-      <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr auto', gap: '0 40px', alignItems: 'center' }}>
+      <div className="svc-row-main" style={{ display: 'grid', gridTemplateColumns: '64px 1fr auto', gap: '0 40px', alignItems: 'center' }}>
         <span className="mono" style={{ fontSize: 11, letterSpacing: '.12em', color: 'var(--gold)' }}>
           {s.num}
         </span>
         <h3
-          className="serif"
+          className="serif svc-row-title"
           style={{
-            fontSize: 'clamp(26px, 4vw, 54px)',
+            fontSize: 'clamp(22px, 4vw, 54px)',
             lineHeight: 1.02,
             margin: 0,
             letterSpacing: '-0.025em',
@@ -48,18 +49,19 @@ function ServiceRow({ s }: { s: typeof SERVICES[0] }) {
         </h3>
         <div style={{ display: 'flex', alignItems: 'center', gap: 20, flexShrink: 0 }}>
           <span
-            className="mono"
+            className="mono svc-row-tag"
             style={{
               fontSize: 10,
               letterSpacing: '.18em',
               textTransform: 'uppercase',
               color: 'var(--gold)',
-              border: '0.5px solid rgba(201,146,58,.35)',
+              borderWidth: '0.5px',
+              borderStyle: 'solid',
+              borderColor: open ? 'rgba(201,146,58,.6)' : 'rgba(201,146,58,.35)',
               padding: '5px 13px',
               borderRadius: 999,
               transition: 'border-color .35s, background .35s',
               background: open ? 'rgba(201,146,58,.1)' : 'transparent',
-              ...(open ? { borderColor: 'rgba(201,146,58,.6)' } : {}),
             }}
           >
             {s.tag}
@@ -81,6 +83,7 @@ function ServiceRow({ s }: { s: typeof SERVICES[0] }) {
 
       {/* Expanding description — grid-template-rows trick for smooth height */}
       <div
+        className="svc-row-expand"
         style={{
           display: 'grid',
           gridTemplateRows: open ? '1fr' : '0fr',
@@ -88,13 +91,14 @@ function ServiceRow({ s }: { s: typeof SERVICES[0] }) {
         }}
       >
         <div style={{ overflow: 'hidden' }}>
-          <div style={{ display: 'grid', gridTemplateColumns: '64px 1fr auto', gap: '0 40px', paddingTop: 24 }}>
-            <div />
+          <div className="svc-row-desc" style={{ display: 'grid', gridTemplateColumns: '64px 1fr auto', gap: '0 40px', paddingTop: 24 }}>
+            <div className="svc-row-spacer" />
             <p style={{ fontSize: 15.5, color: 'rgba(245,237,218,.78)', lineHeight: 1.7, margin: 0, maxWidth: 520 }}>
               {s.d}
             </p>
             <a
               href="#contact"
+              onClick={e => e.stopPropagation()}
               style={{
                 display: 'inline-flex',
                 alignItems: 'center',
@@ -134,7 +138,7 @@ export default function Services() {
         {/* Header */}
         <div
           ref={headerRef}
-          className="reveal"
+          className="reveal services-header"
           style={{
             display: 'grid',
             gridTemplateColumns: '1fr 1fr',

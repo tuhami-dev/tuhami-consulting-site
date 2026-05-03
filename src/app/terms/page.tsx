@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 export default function TermsOfService() {
   return (
     <>
-      <Nav />
+      <Nav forceDark />
       <main style={{ background: 'var(--bg)', minHeight: '100vh', paddingTop: 120 }}>
         <div style={{ maxWidth: 720, margin: '0 auto', padding: '60px 24px 120px' }}>
           <p className="mono" style={{ fontSize: 11, letterSpacing: '.18em', textTransform: 'uppercase', color: 'var(--muted)', marginBottom: 24 }}>

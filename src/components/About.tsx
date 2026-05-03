@@ -26,7 +26,7 @@ export default function About() {
           <div className="section-eyebrow">About</div>
         </Reveal>
 
-        <div style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 80, alignItems: 'start' }}>
+        <div className="about-grid" style={{ display: 'grid', gridTemplateColumns: '1.1fr 1fr', gap: 80, alignItems: 'start' }}>
           <Reveal>
             <h2 className="serif" style={{ fontSize: 'clamp(48px, 6.5vw, 104px)', lineHeight: 0.95, margin: 0, letterSpacing: '-0.035em' }}>
               Meet <em className="serif-it" style={{ color: 'var(--ink-soft)' }}>Anas.</em>

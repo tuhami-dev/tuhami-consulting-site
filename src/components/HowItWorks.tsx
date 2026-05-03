@@ -19,16 +19,16 @@ const STEPS = [
   },
 ];
 
-function Reveal({ children, style }: { children: React.ReactNode; style?: React.CSSProperties }) {
+function Reveal({ children, style, className }: { children: React.ReactNode; style?: React.CSSProperties; className?: string }) {
   const ref = useReveal();
-  return <div ref={ref} className="reveal" style={style}>{children}</div>;
+  return <div ref={ref} className={`reveal${className ? ` ${className}` : ''}`} style={style}>{children}</div>;
 }
 
 export default function HowItWorks() {
   return (
     <section className="section" id="process">
       <div className="container">
-        <Reveal style={{ marginBottom: 80, display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 60, alignItems: 'end' }}>
+        <Reveal className="how-header" style={{ marginBottom: 80, display: 'grid', gridTemplateColumns: '1fr 1.6fr', gap: 60, alignItems: 'end' }}>
           <div>
             <div className="section-eyebrow" style={{ marginBottom: 28 }}>
               <span className="khatim" style={{ color: 'var(--gold)' }} />
@@ -47,7 +47,7 @@ export default function HowItWorks() {
 
         <div style={{ display: 'flex', flexDirection: 'column', gap: 0 }}>
           {STEPS.map((s) => (
-            <Reveal key={s.n} style={{
+            <Reveal key={s.n} className="how-step" style={{
               borderTop: '0.5px solid var(--line)',
               padding: '56px 0',
               display: 'grid',

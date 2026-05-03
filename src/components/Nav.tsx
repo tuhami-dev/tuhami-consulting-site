@@ -1,5 +1,6 @@
 'use client';
 import { useState, useEffect, useRef } from 'react';
+import { usePathname } from 'next/navigation';
 
 const BOOKING_URL = 'https://cal.com/tuhami-consulting/discovery';
 
@@ -22,9 +23,10 @@ function Magnetic({ children }: { children: React.ReactNode }) {
   return <div ref={ref} className="magnetic" data-magnetic>{children}</div>;
 }
 
-export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
+export default function Nav({ overVideo = false, forceDark = false }: { overVideo?: boolean; forceDark?: boolean }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 32);
@@ -33,7 +35,7 @@ export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
   }, []);
 
   const onVideo = overVideo && !scrolled;
-  const dark = onVideo || scrolled;
+  const dark = forceDark || onVideo || scrolled;
   const fg = dark ? '#FFFFFF' : 'var(--ink)';
   const fgSoft = dark ? 'rgba(255,255,255,0.75)' : 'var(--ink-soft)';
 
@@ -69,16 +71,17 @@ export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
         }}
       >
         {/* Logo */}
-        <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-          style={{ background: 'none', border: 'none', cursor: 'pointer', textDecoration: 'none', color: fg, display: 'flex', alignItems: 'center', gap: 10, textShadow: onVideo ? '0 1px 14px rgba(0,0,0,.55)' : 'none', padding: 0 }}>
+        <a href="/"
+          onClick={e => { if (pathname === '/') { e.preventDefault(); window.scrollTo({ top: 0, behavior: 'smooth' }); } }}
+          style={{ textDecoration: 'none', color: fg, display: 'flex', alignItems: 'center', gap: 10, textShadow: onVideo ? '0 1px 14px rgba(0,0,0,.55)' : 'none' }}>
           <img src="/logo.png" alt="Tuhami Consulting" style={{ width: 48, height: 48, objectFit: 'contain', flexShrink: 0 }} />
-          <span className="serif" style={{ fontSize: 24, letterSpacing: '-0.02em', color: fg }}>
-            Tuhami Consulting<sup style={{ fontSize: 9, marginLeft: 2, fontFamily: 'Inter', verticalAlign: 'super' }}>®</sup>
+          <span className="serif nav-brand-text" style={{ fontSize: 24, letterSpacing: '-0.02em', color: fg }}>
+            Tuhami Consulting
           </span>
-        </button>
+        </a>
 
         {/* Desktop links */}
-        <div style={{ display: 'flex', gap: 32, alignItems: 'center' }} className="hidden md:flex">
+        <div style={{ gap: 32, alignItems: 'center' }} className="nav-desktop">
           {navLinks.map((l, i) => (
             <button key={l.id} onClick={() => scrollTo(l.id)}
               className="nav-link"
@@ -108,8 +111,8 @@ export default function Nav({ overVideo = false }: { overVideo?: boolean }) {
           {/* Mobile hamburger */}
           <button
             onClick={() => setMenuOpen(v => !v)}
-            className="flex md:hidden"
-            style={{ background: 'none', border: 'none', cursor: 'pointer', color: fg, padding: 4, flexDirection: 'column', gap: 5, display: 'none' }}
+            className="nav-hamburger"
+            style={{ background: 'none', border: 'none', cursor: 'pointer', color: fg, padding: 4, flexDirection: 'column', gap: 5 }}
             aria-label="Menu"
           >
             <span style={{ display: 'block', width: 22, height: 1.5, background: 'currentColor', transition: 'all .3s' }} />
