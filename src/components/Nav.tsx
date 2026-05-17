@@ -47,6 +47,7 @@ export default function Nav({ overVideo = false, forceDark = false }: { overVide
   const navLinks = [
     { label: 'Process', id: 'process' },
     { label: 'Services', id: 'services' },
+    { label: 'Pricing', id: 'pricing' },
     { label: 'Work', id: 'work' },
     { label: 'About', id: 'about' },
     { label: 'Reviews', id: 'reviews' },

@@ -3,6 +3,7 @@ import Hero from '@/components/Hero';
 import LogosMarquee from '@/components/LogosMarquee';
 import HowItWorks from '@/components/HowItWorks';
 import Services from '@/components/Services';
+import Pricing from '@/components/Pricing';
 import CaseStudies from '@/components/CaseStudies';
 import About from '@/components/About';
 import Testimonials from '@/components/Testimonials';
@@ -18,6 +19,7 @@ export default function Home() {
         <LogosMarquee />
         <HowItWorks />
         <Services />
+        <Pricing />
         <CaseStudies />
         <About />
         <Testimonials />
